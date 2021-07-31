@@ -1,53 +1,7 @@
-from typing import List
-import urllib.request
 from operator import itemgetter
-from functools import reduce
-from csv import writer as csv_writer
-from bs4 import BeautifulSoup
 from loguru import logger
 
-
-def read_data_from_source() -> List[List]:
-    """
-    extract data from html table
-    :return: table content
-    """
-
-    # read html content
-    url = "https://en.wikipedia.org/wiki/Road_safety_in_Europe"
-    content = urllib.request.urlopen(url).read()
-
-    logger.info(f"fetching content of {url}...")
-
-    # extract table with beautiful soup
-    s = BeautifulSoup(content, 'html.parser')
-    table = s.find('table', {"class": "wikitable sortable"})
-
-    logger.info(f'Parsing html content for table data')
-
-    data = []
-    rows = table.find_all("tr")
-    for r in rows:
-        # extra cells data
-        row_data = []
-        for cell in r.find_all(['td', 'th']):
-            # get content of cell
-            text = cell.get_text().strip()
-            row_data.append(text)
-
-        data.append(row_data)
-
-    logger.info(f'{len(data)} rows of data extracted')
-    return data
-
-
-def save_to_csv(data: List[List], filename: str) -> None:
-    """
-    save table data to csv file
-    """
-    with open(file=filename, mode="w") as f:
-        write_head = csv_writer(f)
-        write_head.writerows(data)
+from utils import (read_html_table_data, save_to_csv)
 
 
 @logger.catch
@@ -57,11 +11,11 @@ def wrangle_data():
     format
     """
 
-    raw_data = read_data_from_source()
+    raw_data = read_html_table_data()
 
     # save raw data to csv, for record keeping
     logger.info('saving raw table data to raw.csv')
-    save_to_csv(raw_data, "raw.csv")
+    save_to_csv(raw_data, "../raw.csv")
 
     # remove title and summary (footer) rows
     # to be added later
@@ -97,7 +51,7 @@ def wrangle_data():
 
     # save sorted required data
     logger.info('saving required data')
-    save_to_csv(required_data, 'output.csv')
+    save_to_csv(required_data, '../output.csv')
 
     # add titles (headers) and fooer
     new_titles = [''] * required_column_count
@@ -114,7 +68,7 @@ def wrangle_data():
     required_data.insert(0, new_titles)
 
     logger.info('saving required data with header')
-    save_to_csv(required_data, 'output_header.csv')
+    save_to_csv(required_data, '../output_header.csv')
 
 
 if __name__ == '__main__':
