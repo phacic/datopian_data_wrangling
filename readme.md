@@ -6,19 +6,20 @@ and export the required data into a csv format.
 ## Running
 This is containerized with docker and has to be installed to run
 
-- To run the script
+- **To run the script**
 
 ```shell
 docker-compose up
 ```
+This will output the files described under [Files of Interest](#files-of-interest).
 
-- To run tests
+- **To run tests**
 
 ```shell
 docker-compose run --rm app pytest
 ```
 
-- To run test with coverage
+- **To run test with coverage**
 
 ```shell
 docker-compose run --rm app pytest --cov
