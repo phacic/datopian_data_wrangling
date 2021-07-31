@@ -1,6 +1,7 @@
 from typing import List
 import urllib.request
 from operator import itemgetter
+from functools import reduce
 from csv import writer as csv_writer
 from bs4 import BeautifulSoup
 from loguru import logger
@@ -49,18 +50,6 @@ def save_to_csv(data: List[List], filename: str) -> None:
         write_head.writerows(data)
 
 
-def str_to_whole_number(n: str) -> int:
-    """
-    converted comma (or dot) separated whole numbers to int
-    removing the dots was necessary because the Germany population
-    was 82.792,351 instead of 82,792,351, and because they are count
-    they will always be whole numbers
-    """
-    n = n.replace(",", '')
-    n = n.replace(".", '')
-    return int(n)
-
-
 @logger.catch
 def wrangle_data():
     """
@@ -77,7 +66,7 @@ def wrangle_data():
     # remove title and summary (footer) rows
     # to be added later
     title_row = raw_data.pop(0)
-    summary_row = raw_data.pop()
+    raw_data.pop()
 
     # required columns
     # Country 0, Year (new), Area 1, Population 2, GDP per capita 3, Population density 4,
@@ -110,13 +99,14 @@ def wrangle_data():
     logger.info('saving required data')
     save_to_csv(required_data, 'output.csv')
 
-    # add titles (headers)
+    # add titles (headers) and fooer
     new_titles = [''] * required_column_count
+
     for k in range(required_column_count):
         if required_column_indexes[k] < 0:
             if k == 1:
                 new_titles[k] = 'Year'
-            if k == last_column_index:
+            elif k == last_column_index:
                 new_titles[k] = "Road deaths per Million Inhabitants"
         else:
             new_titles[k] = title_row[required_column_indexes[k]]
