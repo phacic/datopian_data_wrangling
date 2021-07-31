@@ -15,7 +15,8 @@ def fetch_html():
     url = "https://en.wikipedia.org/wiki/Road_safety_in_Europe"
     logger.info(f"fetching content of {url}...")
 
-    content = urllib.request.urlopen(url).read()
+    response = urllib.request.urlopen(url)
+    content = response.read()
     return content
 
 

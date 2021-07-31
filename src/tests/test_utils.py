@@ -1,18 +1,21 @@
-import pytest
+import os
+
 from src.utils import (read_html_table_data, save_to_csv)
-from src.main import wrangle_data
-
-def test_fetch_html(mocker):
-    pass
 
 
-def test_read_html_table(html_table):
-    assert 1
+def test_read_html_table(html_table, mocker):
+    mocker.patch(
+        "src.utils.fetch_html", return_value=html_table
+    )
+
+    d = read_html_table_data()
+    assert len(d) > 0
 
 
-def test_to_save_csv():
-    pass
+def test_to_save_csv(table_data):
+    filename = 'test1.csv'
+    save_to_csv(table_data, filename)
+    assert os.path.exists(filename)
 
-
-def test_wrangle_data():
-    pass
+    # clean up
+    os.remove(filename)

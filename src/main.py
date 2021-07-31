@@ -1,11 +1,11 @@
+from typing import List
 from operator import itemgetter
 from loguru import logger
 
-from utils import (read_html_table_data, save_to_csv)
+from src.utils import (read_html_table_data, save_to_csv)
 
 
-@logger.catch
-def wrangle_data():
+def wrangle_data() -> List[List]:
     """
     extract data from url, select what's needed and store the output in a csv
     format
@@ -53,7 +53,7 @@ def wrangle_data():
     logger.info('saving required data')
     save_to_csv(required_data, '../output.csv')
 
-    # add titles (headers) and fooer
+    # add titles (headers)
     new_titles = [''] * required_column_count
 
     for k in range(required_column_count):
@@ -69,6 +69,9 @@ def wrangle_data():
 
     logger.info('saving required data with header')
     save_to_csv(required_data, '../output_header.csv')
+
+    # return data that can be tested
+    return required_data
 
 
 if __name__ == '__main__':

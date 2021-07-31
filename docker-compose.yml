@@ -5,4 +5,6 @@ services:
     build: .
     volumes:
       - .:/app/
+    environment:
+      - PYTHONPATH=.
     command: python src/main.py
