@@ -1,0 +1,77 @@
+{
+  "resources": [
+    {
+      "path": "data.csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "Country",
+            "type": "string",
+            "format": "default",
+            "description": "Country in question",
+            "title": "Country"
+          },
+          {
+            "name": "Years",
+            "type": "integer",
+            "format": "default",
+            "title": "Year"
+          },
+          {
+            "name": "Area",
+            "type": "integer",
+            "format": "default",
+            "title": "Area",
+            "description": "Area in thousands of kilometers squared"
+          },
+          {
+            "name": "Population",
+            "type": "integer",
+            "format": "default",
+            "title": "Population"
+          },
+          {
+            "name": "GDP per capita",
+            "type": "integer",
+            "format": "default",
+            "title": "GDP per capita"
+          },
+          {
+            "name": "Population Density",
+            "type": "integer",
+            "format": "default",
+            "title": "Population Density",
+            "description": "Population density inhabitants per km2)"
+          },
+          {
+            "name": "Vehicle Ownership",
+            "type": "integer",
+            "format": "default",
+            "title": "Vehicle Ownership",
+            "description": "Vehicle ownership per thousand inhabitants"
+          },
+          {
+            "name": "Total Death",
+            "type": "integer",
+            "format": "default",
+            "title": "Total Death"
+          },
+          {
+            "name": "Road Death Per Million Inhabitant",
+            "type": "integer",
+            "format": "default",
+            "title": "Road Death Per Million Inhabitant"
+          }
+        ]
+      },
+      "name": "Road Safety in Europe in 2018",
+      "profile": "tabular-data-resource"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Adu-Gyamfi Karlmichael",
+      "role": "author"
+    }
+  ]
+}

@@ -51,7 +51,7 @@ def wrangle_data() -> List[List]:
 
     # save sorted required data
     logger.info('saving required data')
-    save_to_csv(required_data, '../output.csv')
+    save_to_csv(required_data, '../data.csv')
 
     # add titles (headers)
     new_titles = [''] * required_column_count
@@ -68,7 +68,7 @@ def wrangle_data() -> List[List]:
     required_data.insert(0, new_titles)
 
     logger.info('saving required data with header')
-    save_to_csv(required_data, '../output_header.csv')
+    save_to_csv(required_data, '../data_with_headers.csv')
 
     # return data that can be tested
     return required_data

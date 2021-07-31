@@ -4,14 +4,14 @@ This is to normalize data from [European Union Road Safety Facts and Figures](ht
 and export the required data into a csv format.
 
 ## Running
-This is containerized with docker and has to be installed to run
+This is containerized with docker and has to be installed to run.
 
 - **To run the script**
 
 ```shell
 docker-compose up
 ```
-This will output the files described under [Files of Interest](#files-of-interest).
+This will output (and update) the files described under [Files of Interest](#files-of-interest).
 
 - **To run tests**
 
@@ -29,8 +29,8 @@ docker-compose run --rm app pytest --cov
 - `raw.csv`
 This is the raw data as extracted from the html table from the above link. That is before the required transformation
 
-- `output.csv`
+- `data.csv`
 This is the product of transforming the above data to the required specifications
   
-- `output_header.csv`
+- `data_with_header.csv`
 Just like the previous but with titles (headers).
