@@ -14,5 +14,5 @@ def test_wrangle_data(mocker, html_table):
         "src.utils.save_to_csv", return_value=None
     )
 
-    data = wrangle_data()
+    data = wrangle_data(None, None, None)
     assert len(data) > 0

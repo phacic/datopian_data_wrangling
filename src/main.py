@@ -1,11 +1,13 @@
 from typing import List
 from operator import itemgetter
+import string
 from loguru import logger
 
 from src.utils import (read_html_table_data, save_to_csv)
 
 
-def wrangle_data() -> List[List]:
+def wrangle_data(raw_filename='raw.csv', data_filename='data.csv',
+                 with_header_filename='data_with_headers.csv') -> List[List]:
     """
     extract data from url, select what's needed and store the output in a csv
     format
@@ -15,7 +17,7 @@ def wrangle_data() -> List[List]:
 
     # save raw data to csv, for record keeping
     logger.info('saving raw table data to raw.csv')
-    save_to_csv(raw_data, "../raw.csv")
+    save_to_csv(raw_data, raw_filename)
 
     # remove title and summary (footer) rows
     # to be added later
@@ -51,7 +53,7 @@ def wrangle_data() -> List[List]:
 
     # save sorted required data
     logger.info('saving required data')
-    save_to_csv(required_data, '../data.csv')
+    save_to_csv(required_data, data_filename)
 
     # add titles (headers)
     new_titles = [''] * required_column_count
@@ -60,15 +62,16 @@ def wrangle_data() -> List[List]:
         if required_column_indexes[k] < 0:
             if k == 1:
                 new_titles[k] = 'Year'
-            elif k == last_column_index:
-                new_titles[k] = "Road deaths per Million Inhabitants"
         else:
-            new_titles[k] = title_row[required_column_indexes[k]]
+            # clean title
+            title: str = title_row[required_column_indexes[k]]
+            title = title.replace("\n", ' ')
+            new_titles[k] = title
 
     required_data.insert(0, new_titles)
 
     logger.info('saving required data with header')
-    save_to_csv(required_data, '../data_with_headers.csv')
+    save_to_csv(required_data, with_header_filename)
 
     # return data that can be tested
     return required_data

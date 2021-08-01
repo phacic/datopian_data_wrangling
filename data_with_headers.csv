@@ -1,8 +1,4 @@
-Country,Year,"Area
-(thousands of km2)[24]",Population in 2018[25],GDP per capita in 2018[26],"Population density
-(inhabitants per km2) in 2017[27]","Vehicle ownership
-(per thousand inhabitants) in 2016[28]",Total Road Deaths in 2018[30],"Road deaths
-per Million Inhabitants in 2018[30]"
+Country,Year,Area (thousands of km2)[24],Population in 2018[25],GDP per capita in 2018[26],Population density (inhabitants per km2) in 2017[27],Vehicle ownership (per thousand inhabitants) in 2016[28],Total Road Deaths in 2018[30],Road deaths per Million Inhabitants in 2018[30]
 United Kingdom,2018,248.5,"66,273,576","32,400",273,544,"1,825",28
 Denmark,2018,42.9,"5,781,190","47,600",137,508,175,30
 Ireland,2018,69.8,"4,830,392","59,400",70,525,146,31

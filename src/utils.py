@@ -53,8 +53,10 @@ def read_html_table_data() -> List[List]:
 
 def save_to_csv(data: List[List], filename: str) -> None:
     """
-    save table data to csv file
+    save table data to csv file.
+    Not passing a filename will not create any file
     """
-    with open(file=filename, mode="w") as f:
-        write_head = csv_writer(f)
-        write_head.writerows(data)
+    if filename:
+        with open(file=filename, mode="w") as f:
+            write_head = csv_writer(f)
+            write_head.writerows(data)
